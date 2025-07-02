@@ -2,7 +2,7 @@ import { Gameboard } from "../src/Gameboard";
 
 beforeEach(() => {
   aBoard = new Gameboard();
-  shipMock = { horizontal: true, length: 1 };
+  shipMock = jest.mock("../src/Ship", () => { return {horizontal: true, length: 1 }});
   [x, y] = [4, 4];
 });
 
@@ -36,4 +36,9 @@ test("Check ship is in every tile", () =>{
   expect(aBoard.place(x, y, shipMock).atPos(x+1, y)).toBe(shipMock);
   expect(aBoard.place(x, y, shipMock).atPos(x+2, y)).toBe(shipMock);
   expect(aBoard.place(x, y, shipMock).atPos(x+3, y)).not.toBe(shipMock);
+});
+
+test("Recieve attack", () => {
+  aBoard.place(x, y, shipMock);
+  expect(aBoard.receiveAttack(x, y).sunk).toBe(true);
 });

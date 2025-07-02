@@ -30,7 +30,22 @@ export class Gameboard {
     }
   }
 
+// TODO 1) create a position check function, 2) add a position controll in atPos() & receiveAttack(), 
+// 3) Make unit test for receiveAttack() using a jest.mock Ship object (like explained in the video)
+
   atPos(x, y) {
     return this.grid[x][y];
   }
+
+  receiveAttack(x, y){
+    const cell = this.grid[x][y]
+    if(typeof this.grid[x][y] === "Ship"){
+      cell.hitIncr();
+      cell.updateSunk();
+    }else{
+      this.grid[x][y] = {miss: true};
+    }
+    return this.grid[x][y];
+  }
+
 }

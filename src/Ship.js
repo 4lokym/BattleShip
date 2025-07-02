@@ -1,3 +1,5 @@
+import { SingleEntryPlugin } from "webpack";
+
 export class Ship{
   hit = 0;
   sunk = false;
@@ -14,5 +16,9 @@ export class Ship{
 
   isSunk(hit, length){
     return (hit === length) ? true : false;
+  }
+
+  updateSunk(){
+    this.sunk = this.isSunk();
   }
 }
