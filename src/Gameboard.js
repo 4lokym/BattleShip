@@ -1,4 +1,7 @@
+import { Ship } from "./Ship";
+
 export class Gameboard {
+  
   constructor() {
     const temp = new Array(10);
     for (let i = 0; i < 10; i++) {
@@ -55,5 +58,16 @@ export class Gameboard {
       cell.updateSunk()
      }
     return this.grid[x][y];
+  }
+
+  allSunk(){
+    for(let i = 0; i < this.grid.length; i++){
+      for(let j= 0; j < this.grid[0].length; j++){
+        if(this.grid[i][j] instanceof Ship && this.grid[i][j].sunk === false){
+          return false;
+        }
+      }
+    }
+    return true;
   }
 }

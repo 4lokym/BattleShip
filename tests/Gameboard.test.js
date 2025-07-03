@@ -1,5 +1,5 @@
-import { experiments } from "webpack";
 import { Gameboard } from "../src/Gameboard";
+import {Ship} from "../src/Ship"
 
 beforeEach(() => {
   aBoard = new Gameboard();
@@ -59,8 +59,16 @@ test("receiveAttack: Recieve attack on ship and on miss", () => {
   expect(shipMock.hitIncr.mock.calls.length).toBe(1);
 });
 
-test("receiveAttack: check gameboard tracks all ships sunk", () =>{
-  aBoard.place(x, y, shipMock);
+test("allSunk: check gameboard tracks all ships sunk", () =>{
+  aBoard.place(x, y, new Ship());
   aBoard.receiveAttack(x, y);
-  expect(aBoard.allSunk)
+  expect(aBoard.allSunk()).toBe(true);
+
+  aBoard.place(x, y+1, new Ship());
+
+  expect(aBoard.allSunk()).toBe(false);
+
+  aBoard.receiveAttack(x, y+1);
+  expect(aBoard.allSunk()).toBe(true);
+
 })
