@@ -8,9 +8,10 @@
   --cell: 2rem;
   --gap: 0.1rem;
   --board: calc((var(--cell) + var(--gap)) * 10 - var(--gap));
-  --def-cell: rgb(241, 241, 241);
-  --outline-cell: rgb(209, 209, 209);
+  --def-cell: rgb(247, 247, 247);
+  --outline-cell: rgb(235, 235, 235);
   --click-cell: rgb(201, 201, 201);
+  --ship: rgb(155, 155, 155);
 }
 
 body {
@@ -47,4 +48,9 @@ body {
 
 .cell:active{
     background-color: var(--click-cell);
+}
+
+.ship{
+    background-color: var(--ship);
+    border: solid 1px black;
 }
