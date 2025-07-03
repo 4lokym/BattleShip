@@ -1,8 +1,50 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-body{
-    background-color: red;
+
+:root {
+  --cell: 2rem;
+  --gap: 0.1rem;
+  --board: calc((var(--cell) + var(--gap)) * 10 - var(--gap));
+  --def-cell: rgb(241, 241, 241);
+  --outline-cell: rgb(209, 209, 209);
+  --click-cell: rgb(201, 201, 201);
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.boards {
+  display: flex;
+  gap: 3rem;
+}
+
+.board {
+  height: var(--board);
+  width: var(--board);
+  background-color: var(--outline-cell);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+}
+
+.cell {
+  height: var(--cell);
+  width: var(--cell);
+  background-color: var(--def-cell);
+}
+
+.cell:hover{
+    background-color: var(--outline-cell);
+    cursor: pointer;
+}
+
+.cell:active{
+    background-color: var(--click-cell);
 }
