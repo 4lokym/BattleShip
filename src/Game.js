@@ -32,9 +32,24 @@ export class DOMGameBoard{
     this.Player2 = Player2;
   }
 
-  printBoard(DOMcontainer, player){
-    for(let i = 0; board.length< 10; i++){
-      for(let j = 0; j < 10; j++){
+  fromCellToDOM(cell){
+    const domCell = document.createElement("div");
+    domCell.classList.add("cell");
+
+    if(cell.hasOwn("miss")){
+      domCell.classList.add("miss");
+    }else if(cell.hasOwn("sunk")){
+      domCell.classList.add("ship");
+      if(cell.sunk){
+        domCell.classList.add("sunk");
+      }
+    }
+    return domCell;
+  }
+
+  printBoard(board){
+    for(let i = 0; i < board.length; i++){
+      for(let j = 0; j < board[0].length; j++){
         let cell = document.createElement("div");
         cell.classList.add("cell");
         cell.id = `R${i}C${j}`;

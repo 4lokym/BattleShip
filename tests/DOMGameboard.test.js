@@ -2,27 +2,30 @@ import { DOMGameBoard } from "../src/Game";
 import { Gameboard } from "../src/Gameboard";
 
 const boardMock = jest.mock("../src/Gameboard", () => {new Gameboard()});
+beforeEach(() =>{
+  DOMboard = new DOMGameBoard(1, 2);
+});
 
 
 //fromCellToDOM should return a dom element with correct classes and attributes
 test("fromCellToDOM: cell is empty", () => {
-  expect(fromCellToDOM({}).classList.contains("cell")).toEqual(true);
+  expect(DOMboard.fromCellToDOM({}).classList.contains("cell")).toEqual(true);
 })
 
 test("fromCellToDOM: cell has a ship",() => {
-  expect(fromCellToDOM({horizontal: true, length: 1, sunk: false}).classList.contains("ship")).toEqual(true);
+  expect(DOMboard.fromCellToDOM({horizontal: true, length: 1, sunk: false}).classList.contains("ship")).toEqual(true);
 })
 
 test("fromCellToDOM: cell has a sunk ship",() => {
-  expect(fromCellToDOM({horizontal: true, length: 1, sunk: false}).classList.contains("sunk")).toEqual(true);
+  expect(DOMboard.fromCellToDOM({horizontal: true, length: 1, sunk: false}).classList.contains("sunk")).toEqual(true);
 })
 test("fromCellToDOM: cell is miss",() => {
-  expect(fromCellToDOM({miss: true}).classList.contains("miss")).toEqual(true);
+  expect(DOMboard.fromCellToDOM({miss: true}).classList.contains("miss")).toEqual(true);
 })
 
 test("buildBoard: get domElement list with all cells", () => {
   //buildBoard should return an array of DOM elements rappresenting the cells
-  const arr = buildBoard(boardMock);
+  const arr = DOMboard.buildBoard(boardMock);
 
   //if implementation changes and test breaks, delete this {
   boardMock.place(0, 0, {horizontal: true, length: 1, sunk: false})
