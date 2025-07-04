@@ -16,6 +16,11 @@
   --ship-hover: rgb(172, 172, 172);
   --ship-active: rgb(204, 204, 204);
   --cross-height: calc(var(--cell)*2);
+  --miss: rgb(224, 224, 160);
+  --miss-hover: rgba(211, 211, 137, 0.63);
+  --center-right: calc((var(--cell)/2));
+  --center-top: calc(var(--cell)/2);
+  --miss-circle: rgb(156, 156, 100);
 }
 
 body {
@@ -65,9 +70,9 @@ body {
   background-color: var(--ship-hover);
 }
 
-.ship:active{
+/* .ship:active{
   background-color: var(--ship-active);
-}
+} */
 
 .sunk:after, .sunk:before{
   content: " ";
@@ -75,15 +80,36 @@ body {
   height: var(--cross-height);
   background-color: rgb(184, 118, 118);
   position: absolute;
-  right: calc((var(--cell)/2) - var(--gap));
-  top: calc(((var(--cell) + var(--gap))/2)* -1);
-  
+  right: var(--center-right);
+  top: var(--center-top);
+
+
 }
 
 .sunk:after{
-  transform: rotate(45deg);
+  transform: translateX(50%) translateY(-50%) rotate(45deg);
 }
 
 .sunk:before{
-  transform: rotate(-45deg);
+  transform: translateX(50%) translateY(-50%) rotate(-45deg);
+}
+
+.miss{
+  background-color: var(--miss);
+}
+
+.miss:hover{
+  background-color: var(--miss-hover);
+}
+
+.miss:after{
+  transform: translateX(50%) translateY(-50%);
+  content: " ";
+  position: absolute;
+  background-color: var(--miss-circle);
+  height: calc(var(--gap)*2);
+  width: calc(var(--gap)*2);
+  top: var(--center-top);
+  right: var(--center-right);
+  border-radius: 10px;
 }

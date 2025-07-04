@@ -18,6 +18,9 @@ export const game = function(){
 
   boards[0].querySelector("#R3C4").classList.add("ship");
   boards[0].querySelector("#R3C4").classList.add("sunk");
+  boards[0].querySelector("#R5C4").classList.add("sunk");
   boards[0].querySelector("#R4C4").classList.add("ship");
   boards[0].querySelector("#R5C4").classList.add("ship");
+  boards[0].querySelector("#R5C5").classList.add("miss");
+  boards[0].querySelector("#R5C6").classList.add("miss");
 }
