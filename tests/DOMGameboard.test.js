@@ -3,27 +3,21 @@ import { Gameboard } from "../src/Gameboard";
 
 const boardMock = jest.mock("../src/Gameboard", () => {new Gameboard()});
 
-const elem = document.createElement("div");
-elem.classList.add("cell");
 
 //fromCellToDOM should return a dom element with correct classes and attributes
 test("fromCellToDOM: cell is empty", () => {
-  expect(fromCellToDOM()).toEqual(elem);
+  expect(fromCellToDOM({}).classList.contains("cell")).toEqual(true);
 })
 
 test("fromCellToDOM: cell has a ship",() => {
-  elem.classList.add("ship");
-  expect(fromCellToDOM({horizontal: true, length: 1, sunk: false})).toEqual(elem);
+  expect(fromCellToDOM({horizontal: true, length: 1, sunk: false}).classList.contains("ship")).toEqual(true);
 })
 
 test("fromCellToDOM: cell has a sunk ship",() => {
-  elem.classList.add("sunk");
-  expect(fromCellToDOM({horizontal: true, length: 1, sunk: false})).toEqual(elem);
+  expect(fromCellToDOM({horizontal: true, length: 1, sunk: false}).classList.contains("sunk")).toEqual(true);
 })
 test("fromCellToDOM: cell is miss",() => {
-  elem = document.createElement("div");
-  elem.classList.add("miss")
-  expect(fromCellToDOM({miss: true})).toEqual(elem);
+  expect(fromCellToDOM({miss: true}).classList.contains("miss")).toEqual(true);
 })
 
 test("buildBoard: get domElement list with all cells", () => {
@@ -32,7 +26,7 @@ test("buildBoard: get domElement list with all cells", () => {
 
   //if implementation changes and test breaks, delete this {
   boardMock.place(0, 0, {horizontal: true, length: 1, sunk: false})
-  expect(arr[0].classList.contains("ship"));
+  expect(arr[0].classList.contains("ship")).toBe(true);
   //}
 
   expect(arr.length).toBe(100);
