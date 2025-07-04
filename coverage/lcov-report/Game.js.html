@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">10.52% </span>
+                <span class="strong">53.84% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/38</span>
+                <span class='fraction'>21/39</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40% </span>
+                <span class="strong">60% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/5</span>
+                <span class='fraction'>3/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">11.76% </span>
+                <span class="strong">54.28% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/34</span>
+                <span class='fraction'>19/35</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -156,35 +156,35 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">104x</span>
+<span class="cline-any cline-yes">104x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">104x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">103x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">104x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">100x</span>
+<span class="cline-any cline-yes">100x</span>
+<span class="cline-any cline-yes">100x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -225,29 +225,29 @@ export class DOMGameBoard{
 &nbsp;
   fromCellToDOM(cell){
     const domCell = document.createElement("div");
-<span class="cstat-no" title="statement not covered" >    domCell.classList.add("cell");</span>
+    domCell.classList.add("cell");
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if(cell.hasOwn("miss")){</span>
-<span class="cstat-no" title="statement not covered" >      domCell.classList.add("miss");</span>
-    }else <span class="cstat-no" title="statement not covered" >if(cell.hasOwn("sunk")){</span>
-<span class="cstat-no" title="statement not covered" >      domCell.classList.add("ship");</span>
-<span class="cstat-no" title="statement not covered" >      if(cell.sunk){</span>
-<span class="cstat-no" title="statement not covered" >        domCell.classList.add("sunk");</span>
+    if(cell &amp;&amp; Object.hasOwn(cell, "miss")){
+      domCell.classList.add("miss");
+    }else if(cell &amp;&amp; Object.hasOwn(cell, "sunk")){
+      domCell.classList.add("ship");
+      if(cell.sunk){
+        domCell.classList.add("sunk");
       }
     }
-<span class="cstat-no" title="statement not covered" >    return domCell;</span>
+    return domCell;
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  pr</span>intBoard(board){
-<span class="cstat-no" title="statement not covered" >    for(let i = <span class="cstat-no" title="statement not covered" >0;</span> i &lt; board.length; i++){</span>
-<span class="cstat-no" title="statement not covered" >      for(let j = <span class="cstat-no" title="statement not covered" >0;</span> j &lt; board[0].length; j++){</span>
-        let cell = <span class="cstat-no" title="statement not covered" >document.createElement("div");</span>
-<span class="cstat-no" title="statement not covered" >        cell.classList.add("cell");</span>
-<span class="cstat-no" title="statement not covered" >        cell.id = `R${i}C${j}`;</span>
-<span class="cstat-no" title="statement not covered" >        board.appendChild(cell);</span>
+  buildBoard(board){
+    const list = [];
+    for(let i = 0; i &lt; board.length; i++){
+      for(let j = 0; j &lt; board[0].length; j++){
+        let cell = this.fromCellToDOM(board[i][j]);
+        cell.id = `R${i}C${j}`;
+        list.push(cell);
       }
     }
-&nbsp;
+    return list;
   }
 &nbsp;
 &nbsp;
@@ -259,7 +259,7 @@ export class DOMGameBoard{
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-07-04T16:26:50.150Z
+                at 2025-07-04T16:54:30.697Z
             </div>
         <script src="prettify.js"></script>
         <script>

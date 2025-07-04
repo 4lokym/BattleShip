@@ -4,16 +4,10 @@ import { Gameboard } from "./Gameboard";
 export const game = function(){
   const boards = document.querySelectorAll(".board");
 
+  const domGameBoard = new DOMGameBoard(1, 2);
+  const boardG = new Gameboard();
   boards.forEach((board) => {
-    for(let i = 0; i< 10; i++){
-      for(let j = 0; j < 10; j++){
-        let cell = document.createElement("div");
-        cell.classList.add("cell");
-        cell.id = `R${i}C${j}`;
-        board.appendChild(cell);
-      }
-    }
-    console.log([...board.querySelectorAll("div")][15].id);
+    domGameBoard.printBoard(domGameBoard.buildBoard(boardG.grid), board)
   })
 
   boards[0].querySelector("#R3C4").classList.add("ship");
@@ -36,9 +30,9 @@ export class DOMGameBoard{
     const domCell = document.createElement("div");
     domCell.classList.add("cell");
 
-    if(cell.hasOwn("miss")){
+    if(cell && Object.hasOwn(cell, "miss")){
       domCell.classList.add("miss");
-    }else if(cell.hasOwn("sunk")){
+    }else if(cell && Object.hasOwn(cell, "sunk")){
       domCell.classList.add("ship");
       if(cell.sunk){
         domCell.classList.add("sunk");
@@ -47,16 +41,23 @@ export class DOMGameBoard{
     return domCell;
   }
 
-  printBoard(board){
+  buildBoard(board){
+    const list = [];
     for(let i = 0; i < board.length; i++){
       for(let j = 0; j < board[0].length; j++){
-        let cell = document.createElement("div");
-        cell.classList.add("cell");
+        let cell = this.fromCellToDOM(board[i][j]);
         cell.id = `R${i}C${j}`;
-        board.appendChild(cell);
+        list.push(cell);
       }
     }
+    return list;
+  }
 
+  printBoard(list, DOMContainer){
+    for(let i = 0; i< list.length; i++){
+      DOMContainer.appendChild(list[i]);
+    }
+    return this;
   }
 
 

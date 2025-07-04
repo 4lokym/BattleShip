@@ -16,8 +16,8 @@
   --ship-hover: rgb(172, 172, 172);
   --ship-active: rgb(204, 204, 204);
   --cross-height: calc(var(--cell)*2);
-  --miss: rgb(224, 224, 160);
-  --miss-hover: rgba(211, 211, 137, 0.63);
+  --miss: rgba(230, 230, 108, 0.63);
+  --miss-hover: rgb(224, 224, 160) ;
   --center-right: calc((var(--cell)/2));
   --center-top: calc(var(--cell)/2);
   --miss-circle: rgb(156, 156, 100);
