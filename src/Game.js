@@ -9,9 +9,15 @@ export const game = function(){
       for(let j = 0; j < 10; j++){
         let cell = document.createElement("div");
         cell.classList.add("cell");
+        cell.id = `R${i}C${j}`;
         board.appendChild(cell);
       }
     }
-  
+    
   })
+
+  boards[0].querySelector("#R3C4").classList.add("ship");
+  boards[0].querySelector("#R3C4").classList.add("sunk");
+  boards[0].querySelector("#R4C4").classList.add("ship");
+  boards[0].querySelector("#R5C4").classList.add("ship");
 }

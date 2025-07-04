@@ -1,4 +1,4 @@
-import { SingleEntryPlugin } from "webpack";
+
 
 export class Ship{
   hit = 0;
