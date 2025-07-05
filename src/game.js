@@ -5,6 +5,7 @@ import { Ship } from "./Ship";
 
 
 export const game = function(){
+  // init the board
   const [board1, board2] = document.querySelectorAll(".board");
 
   const [player1, player2] = [new Player(new Gameboard), new Player(new Gameboard)];
@@ -38,10 +39,23 @@ export const game = function(){
   
 
   //make the board interactive
-  enemyBoard.DOMContainer.addEventListener("click", (event) => {
-   enemyBoard.click(event.target, enemyBoard);
-  })
+  let switch1 = {active: true};
+  let switch2 = {active: false, other: switch1};
+  switch1.other = switch2;
+
+  interact(myBoard, switch1);
+  interact(enemyBoard, switch2);
 
   
 
+}
+
+function interact(boardTurn, switch_){
+    boardTurn.DOMContainer.addEventListener("click", (event) => {
+      if(switch_.active){
+        boardTurn.click(event.target, boardTurn);
+        switch_.active = false;
+        switch_.other.active = true;
+      }
+    })
 }
