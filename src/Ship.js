@@ -6,16 +6,29 @@ export class Ship{
   
   constructor(length = 1, horizontal = true){
     this.length = length;
+    this.status = new Array(length);
+    for(let i = 0; i< length; i++){
+      this.status[i] = false;
+    }
     this.orizzontal = horizontal;
   }
 
   hitIncr(){
-    this.hit++;
+    if(this.hit < this.length){
+      this.hit++;
+    }
     return this.hit;
   }
 
-  isSunk(hit, length){
-    return (hit === length) ? true : false;
+  hitAt(offset){
+    if(offset >= 0 && offset < this.length){
+      this.status[offset] = true;
+    }
+    return this.status;
+  }
+
+  isSunk(){
+    return (this.hit === this.length) ? true : false;
   }
 
   updateSunk(){

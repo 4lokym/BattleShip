@@ -11,7 +11,22 @@ test("Hit increases hit property", () =>{
 });
 
 test("isSunk", () =>{
-  expect(aShip.isSunk(0, 1)).toBe(false);
+  expect(aShip.isSunk()).toBe(false);
+})
+
+test("status: returns an array that shows where the ship was hit", () =>{
+  aShip = new Ship(3);
+  console.log(aShip.status)
+  console.log(aShip.status[0])
+  expect(aShip.status).toEqual([false, false, false]);
+})
+
+test("hitAt: specifies where to hit a ship", () =>{
+  aShip = new Ship(3);
+  expect(aShip.hitAt(2)).toEqual([false, false, true]);
+  expect(aShip.hitAt(2)).toEqual([false, false, true]);
+  expect(aShip.hitAt(1)).toEqual([false, true, true]);
+  expect(aShip.hitAt(0)).toEqual([true, true, true]);
 })
 
 

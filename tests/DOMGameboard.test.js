@@ -6,7 +6,7 @@ import { DOMGameBoard } from "../src/Game";
 import { Gameboard } from "../src/Gameboard";
 
 const boardMock = new Gameboard();
-let DOMboard = new DOMGameBoard(1, 2);
+let DOMboard = new DOMGameBoard();
 
 //fromCellToDOM should return a dom element with correct classes and attributes
 test("fromCellToDOM: cell is empty", () => {
