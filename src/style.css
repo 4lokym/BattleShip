@@ -51,6 +51,7 @@ body {
   width: var(--cell);
   background-color: var(--def-cell);
   position: relative;
+  transition: background-color 300ms;
 }
 
 .cell-hov:hover{

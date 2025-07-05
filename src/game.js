@@ -30,17 +30,7 @@ export const game = function () {
   enemyBoard.player.gameboard.place(9, 8, new Ship());
   enemyBoard.player.gameboard.place(4, 4, new Ship());
 
-  setTimeout(() => {
-    myBoard.updateBoard();
-  }, 0);
-  enemyBoard.updateBoard(true);
-
-  enemyBoard.player.gameboard.receiveAttack(1, 2);
-  enemyBoard.player.gameboard.receiveAttack(1, 0);
-
-  enemyBoard.updateBoard(true);
   enemyBoard.updateWhiteBoard();
-  enemyBoard.updateBoard(true);
   myBoard.updateBoard();
 
   const game1 = new Game(myBoard, enemyBoard);
@@ -67,7 +57,7 @@ export class Game{
 
   connectEvent(board, switch_) {
     board.DOMContainer.addEventListener("click", (event) => {
-      if(event.target.classList.contains("cell")){
+      if(event.target.classList.contains("cell") && board.clickable(event.target)){
         this.actions(event.target, switch_);
       }
     });
