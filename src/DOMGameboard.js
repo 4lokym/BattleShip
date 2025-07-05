@@ -8,29 +8,44 @@ export class DOMGameBoard {
     this.DOMContainer = DOMContainer;
   }
 
-  fromCellToDOM(cell, hidden = false) {
-    const cellClicked = document.createElement("div");
-    cellClicked.classList.add("cell");
+  fromCellToDOM(cell, hidden = false, disabled = false) {
+    const domCell = document.createElement("div");
+    domCell.classList.add("cell");
+    domCell.classList.add("cell-hov");
+    domCell.classList.add("cell-act");
 
     if (cell && Object.hasOwn(cell, "miss")) {
-      cellClicked.classList.add("miss");
+      domCell.classList.add("miss");
     } else if (cell && Object.hasOwn(cell, "sunk")) {
       if (!hidden) {
-        cellClicked.classList.add("ship");
+        domCell.classList.add("ship");
       }
       if (cell.sunk) {
-        cellClicked.classList.add("ship");
-        cellClicked.classList.add("sunk");
+        domCell.classList.add("ship");
+        domCell.classList.add("sunk");
       }
     }
-    return cellClicked;
+    if(disabled){
+      DOMGameBoard.cellDisable(domCell);
+    }
+    return domCell;
   }
 
-  buildBoard(board, hidden = false) {
+  static cellDisable(cell){
+    cell.classList.remove("cell-hov");
+    cell.classList.remove("cell-act");
+  }
+
+  static cellEnable(cell){
+    cell.classList.add("cell-hov");
+    cell.classList.add("cell-act");
+  }
+
+  buildBoard(board, hidden = false, disabled = false) {
     const list = [];
     for (let i = 0; i < board.length; i++) {
       for (let j = 0; j < board[0].length; j++) {
-        let cell = this.fromCellToDOM(board[i][j], hidden);
+        let cell = this.fromCellToDOM(board[i][j], hidden, disabled);
         cell.id = `RC${i}${j}`;
         list.push(cell);
       }
@@ -55,6 +70,15 @@ export class DOMGameBoard {
     this.printBoard(this.buildBoard(board, hidden), DOMContainer);
   }
 
+  updateWhiteBoard(disabled){
+    this.removeBoard(this.DOMContainer);
+    const list = new Array(10);
+    for(let i = 0; i < list.length; i++){
+      list[i] = new Array(10);
+    }
+    this.printBoard(this.buildBoard(list, false, disabled), this.DOMContainer);
+  }
+
   clickable(cellClicked) {
     return (
       cellClicked.classList.contains("cell") &&
@@ -77,4 +101,6 @@ export class DOMGameBoard {
       this.updateBoard(true);
     }
   }
+
 }
+
