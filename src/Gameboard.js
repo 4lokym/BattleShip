@@ -11,12 +11,12 @@ export class Gameboard {
     this.grid = temp;
   }
 
-  #placeNoLimits(x, y, ship, length = 1, horizontal = true) {
+  #placeNoLimits(x, y, shipCells, length = 1, horizontal = true) {
     for (let i = 0; i < length; i++) {
       if (horizontal) {
-        this.grid[x + i][y] = ship;
+        this.grid[x + i][y] = shipCells[i];
       } else {
-        this.grid[x][y + i] = ship;
+        this.grid[x][y + i] = shipCells[i];
       }
     }
     return this;
@@ -36,7 +36,7 @@ export class Gameboard {
     ) {
       throw new Error("Ship out of the board");
     } else {
-      return this.#placeNoLimits(x, y, ship, ship.length, horizontal);
+      return this.#placeNoLimits(x, y, ship.status, ship.length, horizontal);
     }
   }
 
@@ -50,20 +50,19 @@ export class Gameboard {
 
   receiveAttack(x, y) {
     const cell = this.grid[x][y];
-    if (!cell || cell.miss){
+    if (!cell){
       this.grid[x][y] = { miss: true };
     }else if (cell.sunk){
     }else {
-      cell.hitIncr();
-      cell.updateSunk()
-     }
+      cell.ship.hitShip(cell.offset);
+    }
     return this.grid[x][y];
   }
 
   allSunk(){
     for(let i = 0; i < this.grid.length; i++){
       for(let j= 0; j < this.grid[0].length; j++){
-        if(this.grid[i][j] instanceof Ship && this.grid[i][j].sunk === false){
+        if(this.grid[i][j] && this.grid[i][j].ship && this.grid[i][j].ship.sunk === false){
           return false;
         }
       }

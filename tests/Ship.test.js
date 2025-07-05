@@ -1,35 +1,46 @@
-import {Ship} from "../src/Ship";
+import { Ship } from "../src/Ship";
 
 let aShip;
 
-beforeEach(() =>{
-  return aShip = new Ship();
-})
+beforeEach(() => {
+  aShip = new Ship();
+});
 
-test("Hit increases hit property", () =>{
+test("Hit increases hit property", () => {
   expect(aShip.hitIncr()).toBe(1);
 });
 
-test("isSunk", () =>{
+test("isSunk", () => {
   expect(aShip.isSunk()).toBe(false);
-})
+});
 
-test("status: returns an array that shows where the ship was hit", () =>{
+test("status: returns an array that shows where the ship was hit", () => {
   aShip = new Ship(3);
-  expect(aShip.status).toEqual([false, false, false]);
-})
+  expect(aShip.status[0].sunk).toEqual(false);
+  expect(aShip.status[1].sunk).toEqual(false);
+  expect(aShip.status[2].sunk).toEqual(false);
+  expect(aShip.status[0].ship).toEqual(aShip);
+});
 
-test("hitAt: specifies where to hit a ship", () =>{
+test("hitAt: specifies where to hit a ship", () => {
   aShip = new Ship(3);
-  expect(aShip.hitAt(2)).toEqual([false, false, true]);
-  expect(aShip.hitAt(2)).toEqual([false, false, true]);
-  expect(aShip.hitAt(1)).toEqual([false, true, true]);
-  expect(aShip.hitAt(0)).toEqual([true, true, true]);
+
+  expect(aShip.hitAt(2)[2].sunk).toEqual(true);
+  expect(aShip.status[0].sunk).toEqual(false);
+  expect(aShip.status[1].sunk).toEqual(false);
+
+  expect(aShip.hitAt(2)[2].sunk).toEqual(true);
+  expect(aShip.status[0].sunk).toEqual(false);
+   expect(aShip.status[1].sunk).toEqual(false);
+
+  expect(aShip.hitAt(1)[1].sunk).toEqual(true);
+  expect(aShip.status[0].sunk).toEqual(false);
+   expect(aShip.status[2].sunk).toEqual(true);
+
+  expect(aShip.hitAt(0)[0].sunk).toEqual(true);
 })
 
-test("hitShip: a composition function", () =>{
+test("hitShip: a composition function", () => {
   aShip = new Ship();
-  expect(aShip.hitShip()).toBe(true);
-})
-
-
+  expect(aShip.hitShip().sunk).toBe(true);
+});

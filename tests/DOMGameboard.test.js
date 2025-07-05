@@ -2,8 +2,9 @@
  * @jest-environment jsdom
  */
 
-import { DOMGameBoard } from "../src/Game";
+import { DOMGameBoard } from "../src/DOMGameboard";
 import { Gameboard } from "../src/Gameboard";
+import { Ship } from "../src/Ship";
 
 const boardMock = new Gameboard();
 let DOMboard = new DOMGameBoard();
@@ -42,13 +43,13 @@ test("buildBoard: get domElement list with all cells", () => {
   //buildBoard should return an array of DOM elements rappresenting the cells
 
   
-  boardMock.place(0, 0, { horizontal: true, length: 1, sunk: false });
+  boardMock.place(0, 0, new Ship());
   const arr = DOMboard.buildBoard(boardMock.grid);
   expect(arr[0].classList.contains("ship")).toBe(true);
 
   expect(arr.length).toBe(100);
 
-  // if implementation changes and test breaks, delete the tests below
+  // if implementation changes and test.skip breaks, delete the tests below
   expect(arr[0].id).toBe("R0C0");
   expect(arr[15].id).toBe("R1C5");
 });

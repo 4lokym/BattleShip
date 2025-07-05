@@ -8,7 +8,7 @@ export class Ship{
     this.length = length;
     this.status = new Array(length);
     for(let i = 0; i< length; i++){
-      this.status[i] = false;
+      this.status[i] = new CellShip(this, i);
     }
     this.orizzontal = horizontal;
   }
@@ -22,7 +22,7 @@ export class Ship{
 
   hitAt(offset){
     if(offset >= 0 && offset < this.length){
-      this.status[offset] = true;
+      this.status[offset].sunk = true;
     }
     return this.status;
   }
@@ -31,7 +31,7 @@ export class Ship{
     this.hitIncr();
     this.hitAt(offset);
     this.updateSunk();
-    return this.sunk;
+    return this.status[offset];
   }
 
   isSunk(){
@@ -40,5 +40,13 @@ export class Ship{
 
   updateSunk(){
     this.sunk = this.isSunk();
+  }
+}
+
+class CellShip{
+  constructor(ship, offset = 0,sunk = false){
+    this.ship = ship;
+    this.sunk = sunk;
+    this.offset = offset;
   }
 }
