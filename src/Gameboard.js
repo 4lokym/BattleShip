@@ -11,9 +11,9 @@ export class Gameboard {
     this.grid = temp;
   }
 
-  #placeNoLimits(x, y, shipCells, length = 1, horizontal = true) {
+  #placeNoLimits(x, y, shipCells, length = 1, vertical = true) {
     for (let i = 0; i < length; i++) {
-      if (horizontal) {
+      if (vertical) {
         this.grid[x + i][y] = shipCells[i];
       } else {
         this.grid[x][y + i] = shipCells[i];
@@ -24,19 +24,22 @@ export class Gameboard {
 
   posValid(x, y) {
     if (x >= this.grid.length || x < 0 || y >= this.grid[0].length || y < 0) {
+      return false
+    }
+    if(this.grid[x][y]){
       return false;
     }
     return true;
   }
 
-  place(x, y, ship, horizontal = true) {
+  place(x, y, ship, vertical = true) {
     if (
-      (horizontal && !this.posValid(ship.length - 1 + x, y)) ||
-      (!horizontal && !this.posValid(x, ship.length - 1 + y))
+      (vertical && !this.posValid(ship.length - 1 + x, y)) ||
+      (!vertical && !this.posValid(x, ship.length - 1 + y)) ||
+      (!this.posValid(x,y))
     ) {
-      throw new Error("Ship out of the board");
     } else {
-      return this.#placeNoLimits(x, y, ship.status, ship.length, horizontal);
+      return this.#placeNoLimits(x, y, ship.status, ship.length, vertical);
     }
   }
 

@@ -17,7 +17,7 @@ test("fromCellToDOM: cell is empty", () => {
 test("fromCellToDOM: cell has a ship", () => {
   expect(
     DOMboard.fromCellToDOM({
-      horizontal: true,
+      vertical: true,
       length: 1,
       sunk: false,
     }).classList.contains("ship"),
@@ -27,7 +27,7 @@ test("fromCellToDOM: cell has a ship", () => {
 test("fromCellToDOM: cell has a sunk ship", () => {
   expect(
     DOMboard.fromCellToDOM({
-      horizontal: true,
+      vertical: true,
       length: 1,
       sunk: true,
     }).classList.contains("sunk"),
@@ -53,3 +53,4 @@ test("buildBoard: get domElement list with all cells", () => {
   expect(arr[0].id).toBe("R0C0");
   expect(arr[15].id).toBe("R1C5");
 });
+

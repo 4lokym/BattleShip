@@ -16,6 +16,13 @@ test("posValid: Is valid in a corner", () => {
   expect(aBoard.posValid(x, y)).toBe(false);
 });
 
+test.only("posValid: try to place a ship on top of another ship", () =>{
+  [x, y] = [9, 9];
+
+  aBoard.place(x, y, shipMock, shipMock.vertical);
+  expect(aBoard.posValid(x, y)).toBe(false);
+})
+
 // here i've decided to check the test.skip using the grid property to untie place() fn and atPos()
 test("place: Place a ship and retrieve it", () => {
   [x, y] = [1, 1];
@@ -38,7 +45,7 @@ test("place: Try to place a ship out of the board", () => {
 
 test("place: Placing a ship in a corner", () => {
   [x, y] = [9, 9];
-  expect(aBoard.place(x, y, shipMock, shipMock.horizontal).grid[x][y].ship).toBe(shipMock);
+  expect(aBoard.place(x, y, shipMock, shipMock.vertical).grid[x][y].ship).toBe(shipMock);
 });
 
 test("place: Check ship is in every tile", () =>{
@@ -49,6 +56,7 @@ test("place: Check ship is in every tile", () =>{
   expect(aBoard.place(x, y, shipMock).atPos(x+2, y).ship).toBe(shipMock);
   expect(aBoard.place(x, y, shipMock).atPos(x+3, y)).toBe(undefined);
 });
+
 
 test("receiveAttack: Recieve attack on ship and on miss", () => {
   shipMock.hitIncr = jest.fn(() => {});
@@ -73,3 +81,4 @@ test("allSunk: check gameboard tracks all ships sunk", () =>{
   expect(aBoard.allSunk()).toBe(true);
 
 })
+

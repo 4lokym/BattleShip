@@ -4,13 +4,13 @@ export class Ship{
   hit = 0;
   sunk = false;
   
-  constructor(length = 1, horizontal = true){
+  constructor(length = 1, vertical = true){
     this.length = length;
     this.status = new Array(length);
     for(let i = 0; i< length; i++){
       this.status[i] = new CellShip(this, i);
     }
-    this.orizzontal = horizontal;
+    this.orizzontal = vertical;
   }
 
   hitIncr(){
